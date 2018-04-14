@@ -49,3 +49,27 @@ class DockTypes(Enum):
     WOOL = 3
     ORE = 4
     BRICK = 5
+
+board_representation = """
+          oxo          
+         x   x         
+      oxo  0  oxo      
+     x   x   x   x     
+  oxo  0  oxo  0  oxo  
+ x   x   x   x   x   x 
+o  0  oxo  0  oxo  0  o
+ x   x   x   x   x   x 
+  oxo  0  oxo  0  oxo  
+ x   x   x   x   x   x 
+o  0  oxo  0  oxo  0  o
+ x   x   x   x   x   x 
+  oxo  0  oxo  0  oxo  
+ x   x   x   x   x   x 
+o  0  oxo  0  oxo  0  o
+ x   x   x   x   x   x 
+  oxo  0  oxo  0  oxo  
+     x   x   x   x     
+      oxo  0  oxo       
+         x   x          
+          oxo           
+"""
