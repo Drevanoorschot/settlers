@@ -4,7 +4,7 @@ import pygame
 from pygame._freetype import Font
 from pygame.draw import circle
 
-from model.board import TileType
+from model.board_config import TileType
 
 x_offset = 500
 y_offset = 100
