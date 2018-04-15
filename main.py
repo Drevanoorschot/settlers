@@ -9,6 +9,7 @@ def main():
     # Initialise screen
     pygame.init()
     screen = pygame.display.set_mode((1600, 900))
+    screen.fill(pygame.Color("blue"))
     pygame.display.set_caption('Settlers')
     board = Board()
     draw_board(board, screen)
