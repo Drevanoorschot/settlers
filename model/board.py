@@ -11,8 +11,8 @@ class Board:
             for i in range(0, tile_set[entry]):
                 tiles.append(Tile(entry))
         random.shuffle(tiles)
-        self.assign_number_tokens(tiles)
         self.build_board(tiles)
+        self.assign_number_tokens()
 
     def build_board(self, tiles):
         for line in board_representation.splitlines():
@@ -28,7 +28,12 @@ class Board:
                     row.append(tiles.pop())
             self.data.append(row)
 
-    def assign_number_tokens(self, tiles):
+    def assign_number_tokens(self):
+        tiles = []
+        for row in self.data:
+            for entry in row:
+                if isinstance(entry, Tile):
+                    tiles.append(entry)
         j = 0
         for i in mapping_sequence:
             if tiles[i].resource != TileType.DESERT:
@@ -53,7 +58,10 @@ class Tile:
         self.resource = resource
 
     def __repr__(self):
-        return "0"
+        if self.number is None:
+            return "0"
+        else:
+            return str(self.number)
 
 
 class Node:
