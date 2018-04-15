@@ -1,29 +1,14 @@
-import pygame
-from pygame._freetype import Font
+from tkinter import *
 
 from model.board import Board
 from view.board import draw_board
+from view.color import Color
 
+screen = Tk()
+screen.title("Settlers")
+board = Board()
+board_frame = Canvas(screen, bg=Color.BLUE.value, width=1150, height=1080)
+board_frame.grid(row=0, column=0)
+draw_board(board, board_frame)
 
-def main():
-    # Initialise screen
-    pygame.init()
-    screen = pygame.display.set_mode((1600, 900))
-    screen.fill(pygame.Color("blue"))
-    pygame.display.set_caption('Settlers')
-    board = Board()
-    draw_board(board, screen)
-    # Event loop
-    while 1:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    board = Board()
-                    draw_board(board, screen)
-        pygame.display.flip()
-
-
-if __name__ == '__main__':
-    main()
+screen.mainloop()

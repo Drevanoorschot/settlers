@@ -1,16 +1,12 @@
-import os
-
-import pygame
 from math import sqrt
-from pygame._freetype import Font
-from pygame.draw import circle
+from tkinter import PhotoImage
 
 from model.board import Tile
 from model.board_config import TileType
 
 tile_resolution = (180, 155)
 
-x_offset = 500
+x_offset = 200
 y_offset = 100
 x_distance = 4 * (sqrt(3) / 2 * tile_resolution[1] / 2) / 8
 y_distance = tile_resolution[1] / 4
@@ -21,35 +17,41 @@ token_radius = 20
 token_border_radius = 5
 
 
-def draw_board(board, screen):
-    draw_tiles(board, screen)
+def draw_board(board, frame):
+    draw_tiles(board, frame)
     # draw_number_tokens(board, screen)
 
 
-def draw_tiles(board, screen):
-    desert = pygame.image.load(os.path.join('graphics/desert.png'))
-    brick = pygame.image.load(os.path.join('graphics/brick.png'))
-    wool = pygame.image.load(os.path.join('graphics/wool.png'))
-    wood = pygame.image.load(os.path.join('graphics/wood.png'))
-    ore = pygame.image.load(os.path.join('graphics/ore.png'))
-    grain = pygame.image.load(os.path.join('graphics/grain.png'))
+def draw_tiles(board, frame):
+    desert = PhotoImage(file='graphics/desert.png')
+    frame.desert = desert
+    brick = PhotoImage(file='graphics/brick.png')
+    frame.brick = brick
+    wool = PhotoImage(file='graphics/wool.png')
+    frame.wool = wool
+    wood = PhotoImage(file='graphics/wood.png')
+    frame.wood = wood
+    ore = PhotoImage(file='graphics/ore.png')
+    frame.ore = ore
+    grain = PhotoImage(file='graphics/grain.png')
+    frame.grain = grain
     for y in range(len(board.data)):
         for x in range(len(board.data[y])):
             if isinstance(board.data[y][x], Tile):
                 tile = board.data[y][x]
                 pos = (x_offset + x * x_distance, y_offset + y * y_distance)
                 if tile.resource == TileType.DESERT:
-                    screen.blit(desert, pos)
+                    frame.create_image(pos, image=desert)
                 elif tile.resource == TileType.BRICK:
-                    screen.blit(brick, pos)
+                    frame.create_image(pos, image=brick)
                 elif tile.resource == TileType.WOOL:
-                    screen.blit(wool, pos)
+                    frame.create_image(pos, image=wool)
                 elif tile.resource == TileType.WOOD:
-                    screen.blit(wood, pos)
+                    frame.create_image(pos, image=wood)
                 elif tile.resource == TileType.ORE:
-                    screen.blit(ore, pos)
+                    frame.create_image(pos, image=ore)
                 elif tile.resource == TileType.GRAIN:
-                    screen.blit(grain, pos)
+                    frame.create_image(pos, image=grain)
 
 
 def draw_number_tokens(board, screen):
