@@ -4,6 +4,9 @@ from tkinter import PhotoImage
 from model.board import Tile
 from model.board_config import TileType
 
+tile_path = "graphics/tiles"
+number_path = "graphics/numbers"
+
 tile_resolution = (180, 155)
 
 x_offset = 200
@@ -17,55 +20,94 @@ token_radius = 20
 token_border_radius = 5
 
 
+def load_images(frame):
+    # tiles
+    desert = PhotoImage(file='{}/desert.png'.format(tile_path))
+    frame.desert = desert
+    brick = PhotoImage(file='{}/brick.png'.format(tile_path))
+    frame.brick = brick
+    wool = PhotoImage(file='{}/wool.png'.format(tile_path))
+    frame.wool = wool
+    wood = PhotoImage(file='{}/wood.png'.format(tile_path))
+    frame.wood = wood
+    ore = PhotoImage(file='{}/ore.png'.format(tile_path))
+    frame.ore = ore
+    grain = PhotoImage(file='{}/grain.png'.format(tile_path))
+    frame.grain = grain
+
+    # numbers
+    n2 = PhotoImage(file='{}/2.png'.format(number_path))
+    frame.n2 = n2
+    n3 = PhotoImage(file='{}/3.png'.format(number_path))
+    frame.n3 = n3
+    n4 = PhotoImage(file='{}/4.png'.format(number_path))
+    frame.n4 = n4
+    n5 = PhotoImage(file='{}/5.png'.format(number_path))
+    frame.n5 = n5
+    n6 = PhotoImage(file='{}/6.png'.format(number_path))
+    frame.n6 = n6
+    n8 = PhotoImage(file='{}/8.png'.format(number_path))
+    frame.n8= n8
+    n9 = PhotoImage(file='{}/9.png'.format(number_path))
+    frame.n9 = n9
+    n10 = PhotoImage(file='{}/10.png'.format(number_path))
+    frame.n10 = n10
+    n11 = PhotoImage(file='{}/11.png'.format(number_path))
+    frame.n11 = n11
+    n12 = PhotoImage(file='{}/12.png'.format(number_path))
+    frame.n12 = n12
+
+
 def draw_board(board, frame):
+    load_images(frame)
     draw_tiles(board, frame)
-    # draw_number_tokens(board, screen)
+    draw_number_tokens(board, frame)
 
 
 def draw_tiles(board, frame):
-    desert = PhotoImage(file='graphics/desert.png')
-    frame.desert = desert
-    brick = PhotoImage(file='graphics/brick.png')
-    frame.brick = brick
-    wool = PhotoImage(file='graphics/wool.png')
-    frame.wool = wool
-    wood = PhotoImage(file='graphics/wood.png')
-    frame.wood = wood
-    ore = PhotoImage(file='graphics/ore.png')
-    frame.ore = ore
-    grain = PhotoImage(file='graphics/grain.png')
-    frame.grain = grain
+
     for y in range(len(board.data)):
         for x in range(len(board.data[y])):
             if isinstance(board.data[y][x], Tile):
                 tile = board.data[y][x]
                 pos = (x_offset + x * x_distance, y_offset + y * y_distance)
                 if tile.resource == TileType.DESERT:
-                    frame.create_image(pos, image=desert)
+                    frame.create_image(pos, image=frame.desert)
                 elif tile.resource == TileType.BRICK:
-                    frame.create_image(pos, image=brick)
+                    frame.create_image(pos, image=frame.brick)
                 elif tile.resource == TileType.WOOL:
-                    frame.create_image(pos, image=wool)
+                    frame.create_image(pos, image=frame.wool)
                 elif tile.resource == TileType.WOOD:
-                    frame.create_image(pos, image=wood)
+                    frame.create_image(pos, image=frame.wood)
                 elif tile.resource == TileType.ORE:
-                    frame.create_image(pos, image=ore)
+                    frame.create_image(pos, image=frame.ore)
                 elif tile.resource == TileType.GRAIN:
-                    frame.create_image(pos, image=grain)
+                    frame.create_image(pos, image=frame.grain)
 
 
-def draw_number_tokens(board, screen):
-    for tile in board.tiles:
-        if tile.resource != TileType.DESERT:
-            x_pos = int(x_offset + x_token_offset + tile.coordinates[0] * x_distance)
-            y_pos = int(y_offset + y_token_offset + tile.coordinates[1] * y_distance)
-            pos = (x_pos, y_pos)
-            text_pos = (x_pos - token_radius // 2, y_pos - token_radius // 2)
-            draw_number_token(screen, pos, text_pos, tile.number)
-
-
-def draw_number_token(screen, pos, text_pos, number):
-    circle(screen, pygame.Color("black"), pos, token_radius + token_border_radius)
-    circle(screen, pygame.Color("white"), pos, token_radius)
-    text = pygame.font.SysFont("monospace sans", 30).render(str(number), 1, pygame.Color("black"))
-    screen.blit(text, text_pos)
+def draw_number_tokens(board, frame):
+    for y in range(len(board.data)):
+        for x in range(len(board.data[y])):
+            if board.data[y][x] is not None and isinstance(board.data[y][x], Tile) and board.data[y][x].number is not None:
+                tile = board.data[y][x]
+                pos = (x_offset + x * x_distance, y_offset + y * y_distance)
+                if tile.number == 2:
+                    frame.create_image(pos, image=frame.n2)
+                elif tile.number == 3:
+                    frame.create_image(pos, image=frame.n3)
+                elif tile.number == 4:
+                    frame.create_image(pos, image=frame.n4)
+                elif tile.number == 5:
+                    frame.create_image(pos, image=frame.n5)
+                elif tile.number == 6:
+                    frame.create_image(pos, image=frame.n6)
+                elif tile.number == 8:
+                    frame.create_image(pos, image=frame.n8)
+                elif tile.number == 9:
+                    frame.create_image(pos, image=frame.n9)
+                elif tile.number == 10:
+                    frame.create_image(pos, image=frame.n10)
+                elif tile.number == 11:
+                    frame.create_image(pos, image=frame.n11)
+                elif tile.number == 12:
+                    frame.create_image(pos, image=frame.n12)
