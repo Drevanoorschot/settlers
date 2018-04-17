@@ -1,13 +1,11 @@
 from random import shuffle
-from tkinter import Tk, Canvas
+from tkinter import Tk
 
+from controller.controller import Dice
 from exceptions import InvalidPlayerCountException
 from model.board import Board
-from controller.controller import Dice
 from model.player import Player
-from view.board import build_board
-from view.color import Color
-from view.view import build_gui
+from view.view import GUI
 
 
 class Game:
@@ -22,11 +20,11 @@ class Game:
         self.board = Board()
         self.dice = Dice()
         self.screen = Tk()
+        self.gui = GUI(self.screen, self.dice, self.players[0], self.board)
 
     def run(self):
         self.init()
 
     def init(self):
         self.screen.title("Settlers")
-        build_gui(self.screen, self.dice, self.players[0], self.board)
         self.screen.mainloop()
