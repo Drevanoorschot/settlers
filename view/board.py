@@ -10,7 +10,7 @@ dock_path = "graphics/docks"
 
 tile_resolution = (180, 155)
 
-x_offset = 200
+x_offset = 150
 y_offset = 150
 x_distance = 2 * (sqrt(3) / 2 * tile_resolution[1]) / 8
 y_distance = tile_resolution[1] / 4
