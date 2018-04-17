@@ -4,10 +4,13 @@ from tkinter import PhotoImage, Canvas
 from exceptions import InvalidDockOrientation
 from model.board import Tile, Node
 from model.board_config import TileType, DockType, dock_locations
+from view.color import Color
 
 tile_path = "graphics/tiles"
 number_path = "graphics/numbers"
 dock_path = "graphics/docks"
+
+frame_resolution = (1000, 1000)
 
 tile_resolution = (180, 155)
 
@@ -47,11 +50,13 @@ def load_images(frame):
     frame.n12 = PhotoImage(file='{}/12.png'.format(number_path))
 
 
-def draw_board(board, frame):
-    load_images(frame)
-    draw_tiles(board, frame)
-    draw_number_tokens(board, frame)
-    draw_docks(board, frame)
+def build_board(board, screen):
+    board_frame = Canvas(screen, bg=Color.BLUE.value, width=frame_resolution[0], height=frame_resolution[1])
+    board_frame.grid(row=0, column=0)
+    load_images(board_frame)
+    draw_tiles(board, board_frame)
+    draw_number_tokens(board, board_frame)
+    draw_docks(board, board_frame)
 
 
 def draw_tiles(board, frame):

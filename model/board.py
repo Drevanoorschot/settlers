@@ -42,16 +42,16 @@ class Board:
                 tiles[i].number = numbers[j]
                 j += 1
 
-    def __repr__(self):
-        obj_rep = ""
+    def __str__(self):
+        obj_str = ""
         for row in self.data:
             for obj in row:
                 if obj is None:
-                    obj_rep += ' '
+                    obj_str += ' '
                 else:
-                    obj_rep += repr(obj)
-            obj_rep = obj_rep + "\n"
-        return obj_rep
+                    obj_str += str(obj)
+            obj_str = obj_str + "\n"
+        return obj_str
 
     def place_docks(self):
         docks = []
@@ -73,7 +73,7 @@ class Tile:
         self.number = None
         self.resource = resource
 
-    def __repr__(self):
+    def __str__(self):
         if self.number is None:
             return "0"
         else:
@@ -87,7 +87,7 @@ class Node:
         self.dock = None
         self.dock_orientation = None
 
-    def __repr__(self):
+    def __str__(self):
         return "o"
 
 
@@ -96,5 +96,5 @@ class Edge:
         self.structure = None
         self.owner = None
 
-    def __repr__(self):
+    def __str__(self):
         return "x"
