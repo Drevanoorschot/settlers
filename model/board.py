@@ -1,6 +1,7 @@
 import random
 
-from model.board_config import numbers, mapping_sequence, TileType, tile_set, board_representation
+from model.board_config import numbers, mapping_sequence, TileType, tile_set, board_representation, dock_set, \
+    dock_locations
 
 
 class Board:
@@ -13,6 +14,7 @@ class Board:
         random.shuffle(tiles)
         self.build_board(tiles)
         self.assign_number_tokens()
+        self.place_docks()
 
     def build_board(self, tiles):
         for line in board_representation.splitlines():
@@ -51,6 +53,19 @@ class Board:
             obj_rep = obj_rep + "\n"
         return obj_rep
 
+    def place_docks(self):
+        docks = []
+        for dock_type in dock_set:
+            for i in range(0, dock_set[dock_type]):
+                docks.append(dock_type)
+        random.shuffle(docks)
+        i = 0
+        for coord_pair in dock_locations:
+            for coord in coord_pair:
+                print(coord)
+                self.data[coord[1]][coord[0]].dock = docks[i]
+            i += 1
+
 
 class Tile:
     def __init__(self, resource):
@@ -68,6 +83,7 @@ class Node:
     def __init__(self):
         self.structure = None
         self.owner = None
+        self.dock = None
 
     def __repr__(self):
         return "o"

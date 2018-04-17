@@ -42,7 +42,7 @@ tile_set = {
 }
 
 
-class DockTypes(Enum):
+class DockType(Enum):
     UNIVERSAL = 0
     GRAIN = 1
     WOOD = 2
@@ -50,8 +50,29 @@ class DockTypes(Enum):
     ORE = 4
     BRICK = 5
 
-board_representation = """
-          oxo          
+
+dock_set = {
+    DockType.UNIVERSAL: 4,
+    DockType.GRAIN: 1,
+    DockType.WOOD: 1,
+    DockType.WOOL: 1,
+    DockType.ORE: 1,
+    DockType.BRICK: 1
+
+}
+
+dock_locations = [[(10, 0), (12, 0)],
+                  [(6, 2), (4, 4)],
+                  [(16, 2), (18, 4)],
+                  [(2, 8), (0, 10)],
+                  [(20, 8), (22, 10)],
+                  [(0, 14), (2, 16)],
+                  [(22, 14), (20, 16)],
+                  [(6, 18), (8, 18)],
+                  [(14, 18), (16, 18)]
+                  ]
+
+board_representation = """          oxo          
          x   x         
       oxo  0  oxo      
      x   x   x   x     
