@@ -1,6 +1,7 @@
 from math import sqrt
 from tkinter import PhotoImage, Canvas
 
+from exceptions import InvalidDockOrientation
 from model.board import Tile, Node
 from model.board_config import TileType, DockType, dock_locations
 
@@ -121,7 +122,7 @@ def draw_docks(board, frame):
         elif node.dock_orientation == 300:
             pos = (x_offset + x * x_distance + 3 * x_distance, y_offset + y * y_distance)
         else:
-            pos = None
+            raise InvalidDockOrientation(node.dock_orientation)
         frame.create_image(pos, image=image)
 
 
