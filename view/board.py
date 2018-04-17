@@ -23,44 +23,27 @@ token_border_radius = 5
 
 def load_images(frame):
     # tiles
-    desert = PhotoImage(file='{}/desert.png'.format(tile_path))
-    frame.desert = desert
-    brick = PhotoImage(file='{}/brick.png'.format(tile_path))
-    frame.brick = brick
-    wool = PhotoImage(file='{}/wool.png'.format(tile_path))
-    frame.wool = wool
-    wood = PhotoImage(file='{}/wood.png'.format(tile_path))
-    frame.wood = wood
-    ore = PhotoImage(file='{}/ore.png'.format(tile_path))
-    frame.ore = ore
-    grain = PhotoImage(file='{}/grain.png'.format(tile_path))
-    frame.grain = grain
+    frame.desert = PhotoImage(file='{}/desert.png'.format(tile_path))
+    frame.brick = PhotoImage(file='{}/brick.png'.format(tile_path))
+    frame.wool = PhotoImage(file='{}/wool.png'.format(tile_path))
+    frame.wood = PhotoImage(file='{}/wood.png'.format(tile_path))
+    frame.ore = PhotoImage(file='{}/ore.png'.format(tile_path))
+    frame.grain = PhotoImage(file='{}/grain.png'.format(tile_path))
 
     # docks
     frame.docks = []
 
-
     # numbers
-    n2 = PhotoImage(file='{}/2.png'.format(number_path))
-    frame.n2 = n2
-    n3 = PhotoImage(file='{}/3.png'.format(number_path))
-    frame.n3 = n3
-    n4 = PhotoImage(file='{}/4.png'.format(number_path))
-    frame.n4 = n4
-    n5 = PhotoImage(file='{}/5.png'.format(number_path))
-    frame.n5 = n5
-    n6 = PhotoImage(file='{}/6.png'.format(number_path))
-    frame.n6 = n6
-    n8 = PhotoImage(file='{}/8.png'.format(number_path))
-    frame.n8 = n8
-    n9 = PhotoImage(file='{}/9.png'.format(number_path))
-    frame.n9 = n9
-    n10 = PhotoImage(file='{}/10.png'.format(number_path))
-    frame.n10 = n10
-    n11 = PhotoImage(file='{}/11.png'.format(number_path))
-    frame.n11 = n11
-    n12 = PhotoImage(file='{}/12.png'.format(number_path))
-    frame.n12 = n12
+    frame.n2 = PhotoImage(file='{}/2.png'.format(number_path))
+    frame.n3 = PhotoImage(file='{}/3.png'.format(number_path))
+    frame.n4 = PhotoImage(file='{}/4.png'.format(number_path))
+    frame.n5 = PhotoImage(file='{}/5.png'.format(number_path))
+    frame.n6 = PhotoImage(file='{}/6.png'.format(number_path))
+    frame.n8 = PhotoImage(file='{}/8.png'.format(number_path))
+    frame.n9 = PhotoImage(file='{}/9.png'.format(number_path))
+    frame.n10 = PhotoImage(file='{}/10.png'.format(number_path))
+    frame.n11 = PhotoImage(file='{}/11.png'.format(number_path))
+    frame.n12 = PhotoImage(file='{}/12.png'.format(number_path))
 
 
 def draw_board(board, frame):
@@ -137,11 +120,12 @@ def draw_docks(board, frame):
             pos = (x_offset + x * x_distance + x_distance, y_offset + y * y_distance + y_distance * 2)
         elif node.dock_orientation == 300:
             pos = (x_offset + x * x_distance + 3 * x_distance, y_offset + y * y_distance)
+        else:
+            pos = None
         frame.create_image(pos, image=image)
 
 
-
 def get_image(dock, frame, rotation):
-        image = PhotoImage(file="{}/{}/{}.png".format(dock_path, rotation, dock))
-        frame.docks.append(image)
-        return frame.docks[frame.docks.index(image)]
+    image = PhotoImage(file="{}/{}/{}.png".format(dock_path, rotation, dock))
+    frame.docks.append(image)
+    return frame.docks[frame.docks.index(image)]
