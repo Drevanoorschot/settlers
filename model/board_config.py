@@ -50,6 +50,21 @@ class DockType(Enum):
     ORE = 4
     BRICK = 5
 
+    def __str__(self):
+        if self == DockType.UNIVERSAL:
+            return "universal"
+        if self == DockType.GRAIN:
+            return "grain"
+        if self == DockType.BRICK:
+            return "brick"
+        if self == DockType.WOOD:
+            return "wood"
+        if self == DockType.WOOL:
+            return "wool"
+        if self == DockType.ORE:
+            return "ore"
+
+
 
 dock_set = {
     DockType.UNIVERSAL: 4,
@@ -61,15 +76,15 @@ dock_set = {
 
 }
 
-dock_locations = [[(10, 0), (12, 0)],
-                  [(6, 2), (4, 4)],
-                  [(16, 2), (18, 4)],
-                  [(2, 8), (0, 10)],
-                  [(20, 8), (22, 10)],
-                  [(0, 14), (2, 16)],
-                  [(22, 14), (20, 16)],
-                  [(6, 18), (8, 18)],
-                  [(14, 18), (16, 18)]
+dock_locations = [[[(0, 10), (0, 12)], 0],
+                  [[(2, 6), (4, 4)], 60],
+                  [[(2, 16), (4, 18)], 300],
+                  [[(8, 2), (10, 0)], 60],
+                  [[(8, 20), (10, 22)], 300],
+                  [[(14, 0), (16, 2)], 120],
+                  [[(14, 22), (16, 20)], 240],
+                  [[(18, 6), (18, 8)], 180],
+                  [[(18, 14), (18, 16)], 180]
                   ]
 
 board_representation = """          oxo          

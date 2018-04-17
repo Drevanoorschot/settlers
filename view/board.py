@@ -1,17 +1,18 @@
 from math import sqrt
-from tkinter import PhotoImage
+from tkinter import PhotoImage, Canvas
 
-from model.board import Tile
-from model.board_config import TileType
+from model.board import Tile, Node
+from model.board_config import TileType, DockType, dock_locations
 
 tile_path = "graphics/tiles"
 number_path = "graphics/numbers"
+dock_path = "graphics/docks"
 
 tile_resolution = (180, 155)
 
 x_offset = 200
-y_offset = 100
-x_distance = 4 * (sqrt(3) / 2 * tile_resolution[1] / 2) / 8
+y_offset = 150
+x_distance = 2 * (sqrt(3) / 2 * tile_resolution[1]) / 8
 y_distance = tile_resolution[1] / 4
 x_token_offset = tile_resolution[0] / 2
 y_token_offset = tile_resolution[1] / 2
@@ -35,6 +36,10 @@ def load_images(frame):
     grain = PhotoImage(file='{}/grain.png'.format(tile_path))
     frame.grain = grain
 
+    # docks
+    frame.docks = []
+
+
     # numbers
     n2 = PhotoImage(file='{}/2.png'.format(number_path))
     frame.n2 = n2
@@ -47,7 +52,7 @@ def load_images(frame):
     n6 = PhotoImage(file='{}/6.png'.format(number_path))
     frame.n6 = n6
     n8 = PhotoImage(file='{}/8.png'.format(number_path))
-    frame.n8= n8
+    frame.n8 = n8
     n9 = PhotoImage(file='{}/9.png'.format(number_path))
     frame.n9 = n9
     n10 = PhotoImage(file='{}/10.png'.format(number_path))
@@ -62,10 +67,10 @@ def draw_board(board, frame):
     load_images(frame)
     draw_tiles(board, frame)
     draw_number_tokens(board, frame)
+    draw_docks(board, frame)
 
 
 def draw_tiles(board, frame):
-
     for y in range(len(board.data)):
         for x in range(len(board.data[y])):
             if isinstance(board.data[y][x], Tile):
@@ -88,7 +93,8 @@ def draw_tiles(board, frame):
 def draw_number_tokens(board, frame):
     for y in range(len(board.data)):
         for x in range(len(board.data[y])):
-            if board.data[y][x] is not None and isinstance(board.data[y][x], Tile) and board.data[y][x].number is not None:
+            if isinstance(board.data[y][x], Tile) and board.data[y][
+                x].number is not None:
                 tile = board.data[y][x]
                 pos = (x_offset + x * x_distance, y_offset + y * y_distance)
                 if tile.number == 2:
@@ -111,3 +117,31 @@ def draw_number_tokens(board, frame):
                     frame.create_image(pos, image=frame.n11)
                 elif tile.number == 12:
                     frame.create_image(pos, image=frame.n12)
+
+
+def draw_docks(board, frame):
+    for dock_location in dock_locations:
+        x = dock_location[0][0][1]
+        y = dock_location[0][0][0]
+        node = board.data[y][x]
+        image = get_image(node.dock, frame, node.dock_orientation)
+        if node.dock_orientation == 0:
+            pos = (x_offset + x * x_distance + x_distance, y_offset + y * y_distance - y_distance * 2)
+        elif node.dock_orientation == 60:
+            pos = (x_offset + x * x_distance - x_distance * 3, y_offset + y * y_distance)
+        elif node.dock_orientation == 120:
+            pos = (x_offset + x * x_distance - x_distance, y_offset + y * y_distance + y_distance * 2)
+        elif node.dock_orientation == 180:
+            pos = (x_offset + x * x_distance + x_distance, y_offset + y * y_distance + y_distance * 2)
+        elif node.dock_orientation == 240:
+            pos = (x_offset + x * x_distance + x_distance, y_offset + y * y_distance + y_distance * 2)
+        elif node.dock_orientation == 300:
+            pos = (x_offset + x * x_distance + 3 * x_distance, y_offset + y * y_distance)
+        frame.create_image(pos, image=image)
+
+
+
+def get_image(dock, frame, rotation):
+        image = PhotoImage(file="{}/{}/{}.png".format(dock_path, rotation, dock))
+        frame.docks.append(image)
+        return frame.docks[frame.docks.index(image)]

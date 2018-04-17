@@ -59,12 +59,13 @@ class Board:
             for i in range(0, dock_set[dock_type]):
                 docks.append(dock_type)
         random.shuffle(docks)
-        i = 0
-        for coord_pair in dock_locations:
-            for coord in coord_pair:
-                print(coord)
-                self.data[coord[1]][coord[0]].dock = docks[i]
-            i += 1
+        j = 0
+        for dock_location in dock_locations:
+            for coord_pair in dock_location[0:1]:
+                for coord in coord_pair:
+                    self.data[coord[0]][coord[1]].dock = docks[j]
+                    self.data[coord[0]][coord[1]].dock_orientation = dock_location[1]
+                j += 1
 
 
 class Tile:
@@ -84,6 +85,7 @@ class Node:
         self.structure = None
         self.owner = None
         self.dock = None
+        self.dock_orientation = None
 
     def __repr__(self):
         return "o"
