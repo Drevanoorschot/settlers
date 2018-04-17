@@ -24,3 +24,21 @@ class Player:
             "wood": 0,
             "wool": 0
         }
+
+
+class Road:
+    def __init__(self, player):
+        self.player = player
+        self.points = 0
+
+
+class Town:
+    def __init__(self, player):
+        self.player = player
+        self.points = 2
+
+
+class Village:
+    def __init__(self, player):
+        self.player = player
+        self.points = 1
