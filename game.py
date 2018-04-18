@@ -1,7 +1,7 @@
 from random import shuffle
 from tkinter import Tk
 
-from controller.controller import Dice
+from controller.controller import Dice, Controller
 from exceptions import InvalidPlayerCountException
 from model.board import Board
 from model.player import Player
@@ -20,7 +20,8 @@ class Game:
         self.board = Board()
         self.dice = Dice()
         self.screen = Tk()
-        self.gui = GUI(self.screen, self.dice, self.players[0], self.board)
+        self.gui = GUI(self, self.players[0])
+        self.turns = 0
 
     def run(self):
         self.init()

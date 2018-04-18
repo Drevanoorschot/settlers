@@ -1,5 +1,6 @@
 from tkinter import Button, Frame, PhotoImage, Label
 
+from controller.controller import Controller
 from view.board import build_board
 
 resource_path = "graphics/resources"
@@ -7,11 +8,12 @@ dice_path = "graphics/dice"
 
 
 class GUI:
-    def __init__(self, screen, dice, player, board):
-        self.screen = screen
-        self.dice = dice
+    def __init__(self, game, player):
+        self.screen = game.screen
+        self.dice = game.dice
         self.player = player
-        self.board = board
+        self.board = game.board
+        self.controller = Controller(self, game)
 
         self.dice_button = None
         self.end_turn_button = None
@@ -34,7 +36,7 @@ class GUI:
         button_frame = Frame(self.right_frame)
         button_frame.grid(row=0, column=1)
         self.dice_button = Button(button_frame, command=lambda: self.dice.roll(self), text="Roll Dice")
-        self.end_turn_button = Button(button_frame, text="End Turn")
+        self.end_turn_button = Button(button_frame, command=lambda: self.controller.end_turn(), text="End Turn")
         self.dice_button.grid(row=0, column=0)
         self.end_turn_button.grid(row=0, column=1)
 
