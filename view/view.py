@@ -1,7 +1,7 @@
 from tkinter import Button, Frame, PhotoImage, Label
 
 from controller.controller import Controller
-from view.board import build_board
+from view.board import BoardView
 
 resource_path = "graphics/resources"
 dice_path = "graphics/dice"
@@ -26,7 +26,7 @@ class GUI:
 
         self.dice_1 = None
         self.dice_2 = None
-        build_board(self.board, self.screen)
+        self.board_view = BoardView(self.screen, self.board)
         self.right_frame = Frame(self.screen)
         self.right_frame.grid(row=0, column=1)
         self.load_images()
