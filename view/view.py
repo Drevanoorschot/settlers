@@ -2,6 +2,7 @@ from tkinter import Button, Frame, PhotoImage, Label
 
 from controller.controller import Controller
 from view.board import BoardView
+from view.overlay import EdgeOverlay, NodeOverlay
 
 resource_path = "graphics/resources"
 dice_path = "graphics/dice"
@@ -27,6 +28,10 @@ class GUI:
         self.dice_1 = None
         self.dice_2 = None
         self.board_view = BoardView(self.screen, self.board)
+
+        self.road_overlay = EdgeOverlay(self.board, self.board_view, self.player)
+        self.node_overlay = NodeOverlay(self.board, self.board_view, self.player)
+
         self.right_frame = Frame(self.screen)
         self.right_frame.grid(row=0, column=1)
         self.load_images()

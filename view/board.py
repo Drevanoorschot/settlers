@@ -5,24 +5,11 @@ from exceptions import InvalidDockOrientation
 from model.board import Tile
 from model.board_config import TileType, dock_locations
 from view.color import Color
+from view.view_config import *
 
 tile_path = "graphics/tiles"
 number_path = "graphics/numbers"
 dock_path = "graphics/docks"
-
-frame_resolution = (1000, 1000)
-
-tile_resolution = (180, 155)
-
-x_offset = 150
-y_offset = 150
-x_distance = 2 * (sqrt(3) / 2 * tile_resolution[1]) / 8
-y_distance = tile_resolution[1] / 4
-x_token_offset = tile_resolution[0] / 2
-y_token_offset = tile_resolution[1] / 2
-
-token_radius = 20
-token_border_radius = 5
 
 
 class BoardView:
@@ -30,7 +17,8 @@ class BoardView:
         self.screen = screen
         self.board = board
 
-        self.board_frame = Canvas(self.screen, bg=Color.BLUE.value, width=frame_resolution[0], height=frame_resolution[1])
+        self.board_frame = Canvas(self.screen, bg=Color.BLUE.value, width=frame_resolution[0],
+                                  height=frame_resolution[1])
         self.board_frame.grid(row=0, column=0)
 
         self.load_images()
